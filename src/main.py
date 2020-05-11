@@ -103,6 +103,9 @@ def main_func(event, content):
 
     if command == '/nas_stamp':
         nas_obj = Nas(nas_user_id, nas_user_name, team_id)
+        if STAMP_CONFIG.has_section(stamp_name) is False:
+            return requests.codes.ok
+
         if nas_obj.chack_self_portrait(receive_user_id) is True:
             print('self portrait')
             send_user_slack_text = '自画自賛乙'

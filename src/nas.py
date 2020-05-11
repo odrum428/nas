@@ -54,16 +54,16 @@ class Nas:
         return False
 
     def nas_stamp(self, receive_user_id, receive_user_name, stamp_name):
+        if STAMP_CONFIG.has_section(stamp_name) is False:
+            print('this is not nas stamp')
+            return False
+
         if self.chack_self_portrait(receive_user_id) is True:
             print('self_portrait')
             return False
 
         if self.check_can_send_nas() is False:
             print('nas send limit')
-            return False
-
-        if STAMP_CONFIG.has_section(stamp_name) is False:
-            print('this is not nas stamp')
             return False
 
         send_nas_num = STAMP_CONFIG.get(stamp_name, 'nas_num')
